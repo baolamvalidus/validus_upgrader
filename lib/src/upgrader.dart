@@ -10,11 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:upgrader/src/validus_search_api.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:version/version.dart';
 
 import 'appcast.dart';
-import 'itunes_search_api.dart';
 import 'play_store_search_api.dart';
 import 'upgrade_io.dart';
 import 'upgrade_messages.dart';
@@ -123,6 +123,9 @@ class Upgrader {
 
   /// The target operating system.
   String operatingSystem = UpgradeIO.operatingSystem;
+
+  /// AWS url
+  String? validusVersionUrl;
 
   bool _displayed = false;
   bool _initCalled = false;
@@ -249,21 +252,15 @@ class Upgrader {
       // get iOS version from iTunes Store.
       if (platform == TargetPlatform.android) {
         await _getAndroidStoreVersion();
-      } else if (platform == TargetPlatform.iOS) {
-        final iTunes = ITunesSearchAPI();
+      } else if (platform == TargetPlatform.iOS && validusVersionUrl != null) {
+        final iTunes = ValidusSearchAPI();
         iTunes.client = client;
-        final response = await (iTunes
-            .lookupByBundleId(_packageInfo!.packageName, country: country));
+        final response = await (iTunes.lookupByAws(validusVersionUrl!));
 
         if (response != null) {
-          _appStoreVersion ??= ITunesResults.version(response);
-          _appStoreListingURL ??= ITunesResults.trackViewUrl(response);
-          _releaseNotes ??= ITunesResults.releaseNotes(response);
-          final mav = ITunesResults.minAppVersion(response);
-          if (mav != null) {
-            minAppVersion = mav.toString();
-            print('upgrader: ITunesResults.minAppVersion: $minAppVersion');
-          }
+          _appStoreVersion ??= ValidusVersionResult.version(response);
+          _appStoreListingURL ??= ValidusVersionResult.appStoreListingURL(response);
+          minAppVersion ??= ValidusVersionResult.minVersion(response);
         }
       }
     }

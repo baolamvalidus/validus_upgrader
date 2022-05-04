@@ -31,6 +31,14 @@ class MyApp extends StatelessWidget {
           ),
           body: UpgradeAlert(
             debugLogging: true,
+            showReleaseNotes: false,
+
+            /// Force
+            validusVersionUrl: "https://run.mocky.io/v3/0ec9185e-b762-4aa4-bf5b-f685fddd1e64",
+
+            /// Optional
+            // validusVersionUrl: "https://run.mocky.io/v3/0b444760-4aa8-449f-9419-9c68c829d785",
+
             child: Center(child: Text('Checking...')),
           )),
     );

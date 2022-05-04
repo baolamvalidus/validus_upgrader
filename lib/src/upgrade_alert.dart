@@ -33,6 +33,7 @@ class UpgradeAlert extends UpgradeBase {
     String? countryCode,
     String? minAppVersion,
     UpgradeDialogStyle? dialogStyle,
+    String? validusVersionUrl
   }) : super(
           key: key,
           appcastConfig: appcastConfig,
@@ -54,6 +55,7 @@ class UpgradeAlert extends UpgradeBase {
           countryCode: countryCode,
           minAppVersion: minAppVersion,
           dialogStyle: dialogStyle,
+          validusVersionUrl: validusVersionUrl
         );
 
   @override
