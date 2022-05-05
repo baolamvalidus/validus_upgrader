@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:upgrader/upgrader.dart';
+import 'dart:io' show Platform;
 
 /// A widget to display the upgrade dialog.
 class UpgradeAlert extends UpgradeBase {
@@ -69,7 +70,8 @@ class UpgradeAlert extends UpgradeBase {
         builder: (BuildContext context, AsyncSnapshot<bool> processed) {
           if (processed.connectionState == ConnectionState.done &&
               processed.data != null &&
-              processed.data!) {
+              processed.data! &&
+              !Platform.isAndroid) {
             Upgrader().checkVersion(context: context);
           }
           return child!;
