@@ -248,11 +248,7 @@ class Upgrader {
         print('upgrader: countryCode: $country');
       }
 
-      // Get Android version from Google Play Store, or
-      // get iOS version from iTunes Store.
-      if (platform == TargetPlatform.android) {
-        await _getAndroidStoreVersion();
-      } else if (platform == TargetPlatform.iOS && validusVersionUrl != null) {
+      if (platform == TargetPlatform.iOS && validusVersionUrl != null) {
         final iTunes = ValidusSearchAPI();
         iTunes.client = client;
         final response = await (iTunes.lookupByAws(validusVersionUrl!));
