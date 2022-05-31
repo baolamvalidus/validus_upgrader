@@ -34,12 +34,16 @@ class MyApp extends StatelessWidget {
             showReleaseNotes: false,
 
             /// Force
-            validusVersionUrl: "https://run.mocky.io/v3/0ec9185e-b762-4aa4-bf5b-f685fddd1e64",
+            // validusVersionUrl: "https://run.mocky.io/v3/0ec9185e-b762-4aa4-bf5b-f685fddd1e64",
 
             /// Optional
-            // validusVersionUrl: "https://run.mocky.io/v3/0b444760-4aa8-449f-9419-9c68c829d785",
+            validusVersionUrl: "https://run.mocky.io/v3/16e473e6-3923-45a7-b630-5422a107e3db",
 
             child: Center(child: Text('Checking...')),
+            onUpdate: (force) {
+              print('is force update $force');
+              return true;
+            },
           )),
     );
   }

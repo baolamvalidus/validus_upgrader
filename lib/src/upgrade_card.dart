@@ -25,7 +25,7 @@ class UpgradeCard extends UpgradeBase {
     Duration? durationToAlertAgain,
     BoolCallback? onIgnore,
     BoolCallback? onLater,
-    BoolCallback? onUpdate,
+    bool Function(bool)? onUpdate,
     VoidBoolCallback? willDisplayUpgrade,
     http.Client? client,
     bool? showIgnore,

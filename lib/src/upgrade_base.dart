@@ -35,7 +35,7 @@ class UpgradeBase extends StatefulWidget {
 
   /// Called when the ignore button is tapped or otherwise activated.
   /// Return false when the default behavior should not execute.
-  final BoolCallback? onUpdate;
+  final bool Function(bool)? onUpdate;
 
   /// Called when the user taps outside of the dialog and [canDismissDialog]
   /// is false. Also called when the back button is pressed. Return true for

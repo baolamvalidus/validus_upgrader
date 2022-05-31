@@ -83,7 +83,7 @@ class Upgrader {
 
   /// Called when the update button is tapped or otherwise activated.
   /// Return false when the default behavior should not execute.
-  BoolCallback? onUpdate;
+  bool Function(bool)? onUpdate;
 
   /// Called when the user taps outside of the dialog and [canDismissDialog]
   /// is false. Also called when the back button is pressed. Return true for
@@ -670,7 +670,7 @@ class Upgrader {
     // If this callback has been provided, call it.
     var doProcess = true;
     if (onUpdate != null) {
-      doProcess = onUpdate!();
+      doProcess = onUpdate!(!shouldPop);
     }
 
     if (doProcess) {

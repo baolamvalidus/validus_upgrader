@@ -23,7 +23,7 @@ class UpgradeAlert extends UpgradeBase {
     Duration? durationToAlertAgain,
     BoolCallback? onIgnore,
     BoolCallback? onLater,
-    BoolCallback? onUpdate,
+    bool Function(bool)? onUpdate,
     BoolCallback? shouldPopScope,
     VoidBoolCallback? willDisplayUpgrade,
     http.Client? client,
