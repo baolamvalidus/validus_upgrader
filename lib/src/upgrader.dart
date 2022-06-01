@@ -248,11 +248,7 @@ class Upgrader {
         print('upgrader: countryCode: $country');
       }
 
-      if (platform == TargetPlatform.android) {
-        if (willDisplayUpgrade != null) {
-          willDisplayUpgrade!(false);
-        }
-      } else if (platform == TargetPlatform.iOS && validusVersionUrl != null) {
+     if (platform == TargetPlatform.iOS && validusVersionUrl != null) {
         final iTunes = ValidusSearchAPI();
         iTunes.client = client;
         final response = await (iTunes.lookupByAws(validusVersionUrl!));
