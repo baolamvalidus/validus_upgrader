@@ -44,6 +44,9 @@ class MyApp extends StatelessWidget {
               print('is force update $force');
               return true;
             },
+            willDisplayUpgrade: (display) {
+              print('##############willDisplayUpgrade $display');
+            },
           )),
     );
   }

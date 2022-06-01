@@ -70,8 +70,7 @@ class UpgradeAlert extends UpgradeBase {
         builder: (BuildContext context, AsyncSnapshot<bool> processed) {
           if (processed.connectionState == ConnectionState.done &&
               processed.data != null &&
-              processed.data! &&
-              !Platform.isAndroid) {
+              processed.data!) {
             Upgrader().checkVersion(context: context);
           }
           return child!;
