@@ -75,6 +75,8 @@ class UpgradeBase extends StatefulWidget {
 
   final String? validusVersionUrl;
 
+  final bool? showPromptMessage;
+
   UpgradeBase({
     Key? key,
     this.appcastConfig,
@@ -97,6 +99,7 @@ class UpgradeBase extends StatefulWidget {
     this.minAppVersion,
     this.dialogStyle = UpgradeDialogStyle.material,
     this.validusVersionUrl,
+    this.showPromptMessage = true,
   }) : super(key: key) {
     if (appcastConfig != null) {
       Upgrader().appcastConfig = appcastConfig;
@@ -157,6 +160,9 @@ class UpgradeBase extends StatefulWidget {
     }
     if (validusVersionUrl != null) {
       Upgrader().validusVersionUrl = validusVersionUrl;
+    }
+    if (showPromptMessage != null) {
+      Upgrader().showPromptMessage = showPromptMessage;
     }
   }
 

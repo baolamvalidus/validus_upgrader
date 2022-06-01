@@ -127,6 +127,9 @@ class Upgrader {
   /// AWS url
   String? validusVersionUrl;
 
+  /// Show/hide promt
+  bool? showPromptMessage;
+
   bool _displayed = false;
   bool _initCalled = false;
   PackageInfo? _packageInfo;
@@ -248,7 +251,7 @@ class Upgrader {
         print('upgrader: countryCode: $country');
       }
 
-     if (platform == TargetPlatform.iOS && validusVersionUrl != null) {
+      if (platform == TargetPlatform.iOS && validusVersionUrl != null) {
         final iTunes = ValidusSearchAPI();
         iTunes.client = client;
         final response = await (iTunes.lookupByAws(validusVersionUrl!));
@@ -553,9 +556,10 @@ class Upgrader {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Text(message),
-          Padding(
-              padding: const EdgeInsets.only(top: 15.0),
-              child: Text(messages!.message(UpgraderMessage.prompt)!)),
+          if (showPromptMessage == null && showPromptMessage == true)
+            Padding(
+                padding: const EdgeInsets.only(top: 15.0),
+                child: Text(messages!.message(UpgraderMessage.prompt)!)),
           if (notes != null) notes,
         ],
       )),
@@ -601,9 +605,10 @@ class Upgrader {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Text(message),
-          Padding(
-              padding: const EdgeInsets.only(top: 15.0),
-              child: Text(messages!.message(UpgraderMessage.prompt)!)),
+          if (showPromptMessage == null || showPromptMessage == true)
+            Padding(
+                padding: const EdgeInsets.only(top: 15.0),
+                child: Text(messages!.message(UpgraderMessage.prompt)!)),
           if (notes != null) notes,
         ],
       ),
